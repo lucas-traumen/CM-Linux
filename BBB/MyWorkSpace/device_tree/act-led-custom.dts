@@ -1,0 +1,31 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2835";
+
+    // Add your custom device
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            gpio_leds_act {
+                compatible = "custom,gpio-leds-act";
+                status = "okay";
+                
+                led-act {
+                    label = "act_custom";
+                    gpios = <&gpio 47 1>;
+                    linux,default-trigger = "heartbeat";
+                };
+            };
+        };
+    };
+
+    // Disable the existing leds device
+    fragment@1 {
+        target-path = "/leds";
+        __overlay__ {
+            status = "disabled";
+        };
+    };
+};

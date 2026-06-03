@@ -5,8 +5,7 @@
 #include <sys/sysmacros.h>
 #include <time.h>
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     struct stat sb;
 
@@ -26,7 +25,14 @@ main(int argc, char *argv[])
 
     printf("File type:                ");
 
-    switch (sb.st_mode & S_IFMT) {
+
+    /*
+        No new S_IFMT symbolic names for the file type values of mode_t
+       will be defined by POSIX.1‐2008; if new file types are required,
+       they will only be testable through S_ISxx() or S_TYPEISxxx()
+       macros instead.
+    */
+    switch (sb.st_mode & S_IFMT) { 
     case S_IFBLK:  printf("block device\n");            break;
     case S_IFCHR:  printf("character device\n");        break;
     case S_IFDIR:  printf("directory\n");               break;

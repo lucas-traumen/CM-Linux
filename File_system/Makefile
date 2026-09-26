@@ -1,7 +1,8 @@
 CC :=gcc
+LDFLAG := -Wall -Werror -g -O0
 
 all:
-	$(CC) -o main.exe main.c
+	$(CC) $(LDFLAG) -o main.exe main.c
 exaple:
 	$(CC) -o example.exe example.c
 clean:
